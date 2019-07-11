@@ -1,0 +1,129 @@
+
+https://medium.com/@joselfgaray/dao-workshop-testnet
+
+Este tutorial esta basado en el post de Jose Garay en Medium, cambiando algunas partes y añadiendo otras que con el paso del tiempo han cambiado, por lo que en primer lugar, agradecer su trabajo y esfuerzo con la publicación, muchas gracias!!
+
+
+Lo básico:
+-¿Qué es una DAO?
+DAO son las iniciales de Organización Autónoma Descentralizada. Es una organización construida sobre la blockchain de Ethereum, un conjunto de contratos inteligentes que permiten a las organizaciones operar siguiendo nuevos modelos de gobierno que harán que incluso las nuevas empresas de Silicon Valley parezcan tradicionales. Más sobre la naturaleza de las DAOs aquí(https://medium.com/@joselfgaray/nature-the-ugly-daockling-2-7b3371b55fcd)
+
+-Beneficios de una DAO:
+• No puede ser censurada.
+• Módulos de gobernanza programables para diferentes modelos de organización.
+• Los tokens se distribuyen de forma fácil y transparente.
+• Funciona bajo una jurisdicción digital en nuestra era digital actual.
+• Ningún poder central puede ser corrompido.
+• Es más fácil atraer talento de todo el mundo para contribuir a la misión de la organización.
+• Varias entidades: personas, otras organizaciones, software....
+• Transacciones transparentes.
+
+¿Qué puede hacer Aragon?
+Aragón hace muchas cosas interesantes! Ante todo, Aragón ofrece un software sencillo para la configuración de cualquier organización. Con unos pocos clics y un coste muy bajo, puede empezar a ejecutar una organización digital. Suena bien, ¿no? También proporciona una jurisdicción digital para la gobernanza y la resolución de conflictos: la Red Aragón.
+La Red Aragón (AN) será el primer DAO cuyo objetivo es actuar como una jurisdicción digital que facilite enormemente la operación a organizaciones, emprendedores e inversores.
+La Red Aragón permitirá que las organizaciones se incorporen a ella y utilicen los servicios que ofrece. Además, proporcionará un sistema de gobierno integrado -utilizando el Token de Aragon Network, ANT- para que las organizaciones que lo utilicen decidan qué servicios se prestan, su coste y otros parámetros.
+
+En pocas palabras, funciona de la siguiente manera:
+• Org A se inscribe en la Red.
+• El cliente A compra algo de Org A.
+• La Org A paga a la Red una cuota derivada de esa transacción.
+• La Red acuña tokens para Org A.
+• Org A, o cualquier titular de ANT (nombre del token de Aragon), puede ahora proponer y votar sobre los servicios que debe prestar la Red.
+• Org A, o cualquier otra organización de Aragon que opte por ello, puede beneficiarse de estos servicios.
+• Estos servicios tienen escala de red. Lo que significa que si dos empresas utilizan el servicio judicial, el tribunal ya tiene el poder de recompensar/castigar.
+
+
+::Paso 1::
+Herramientas básicas de Ethereum:
+Daremos por sentado que conoce un poco acerca de lo que es una blockchain y lo que Ethereum hace (si no, hay mucha información en línea para que pueda sumergirse en ella). Sin embargo, algunas herramientas y términos pueden parecer confusos, por lo que detallaremos algunas definiciones muy fáciles de seguir sobre las herramientas clave que debe conocer para configurar una DAO.
+
+• Ether: Moneda de Ethereum. Las cuotas de creación de la organización, voto, etc. se pagarán en Ether.
+• (Rinkeby) Testnet: Red Ethereum construida con fines de prueba donde el Ether es virtual; no tiene valor real. En Aragon la arquitectura se despliega en esta red de pruebas. Para obtener fondos para la Testnet de Rinkeby, siga este enlace.(https://faucet.rinkeby.io/)
+• MetaMask: Es una extensión del navegador que le permite interactuar con Dapps de Ethereum (como Aragon) directamente desde Chrome, Firefox o Brave. Más información y ayuda para la instalación se puede encontrar aquí.(https://metamask.io/)
+• Etherscan: Es un explorador de la blockchain de Ethereum, nos permite analizar y buscar en la blockchain las transacciones, direcciones, tokens, precios y otras actividades que tienen lugar en Ethereum. Aragon nos indicará Etherscan cuando queramos comprobar el historial de transacciones de las aplicaciones, y algunas otras actividades que veremos ahora.
+
+::Paso 2::
+Crear la DAO:
+¿Listo para crear su DAO? Visite https://aragon.org/discover/ y haga clic en el botón azul que dice "Try it out" (le llevará a https://rinkeby.aragon.org/#/ para la red de pruebas Rinkeby o https://mainnet.aragon.org/#/ para la red principal). Esto abrirá un menú inicial muy intuitivo en el que deberá proporcionar la infraestructura básica de su organización.
+	#image1
+
+Primero comprobamos que el nombre que queremos este libre. Elegimos colmenasvq.aragonid.eth, como se muestra a continuación, y pulsamos Siguiente.
+	#image2
+
+Segundo, elegimos entre usar "Democracy" o "Multisig" para tu proyecto (elegimos "Democracy").
+	#image3
+
+Tercero, aseguramos nuestro dominio escribiéndolo en _____.aragonid.eth y hacemos clic en "Next"
+	#image4
+
+Cuarto, debemos elegir 3 métricas para nuestro proyecto de Democracia. Son: Apoyo ("Support" %), Quórum Mínimo ("Min.Quorum" %) y Duración del Voto ("Vote duration", tiempo). 
+-> El apoyo ("Support") es el porcentaje de votos que debe obtener un resultado para que sea un resultado ganador (en este caso, elegimos una mayoría simple del 55%). 
+-> Quórum mínimo ("Min.Quorum") es el porcentaje mínimo de titulares de tokens que deben participar para que la votación sea aceptada, para lo cual elegimos el 23% como ejemplo (Quórum mínimo puede ser un poco confuso, especialmente para las organizaciones pequeñas: veremos más adelante cuando trabajemos con la aplicación de Votación). 
+-> La Duración del Voto ("Vote duration") representa el tiempo en que una votación está abierta (elegimos 72 horas) y hacemos clic en "Next".
+	#image5
+
+A continuación, tenemos que elegir el nombre y el símbolo para el token de nuestra DAO. Escribimos COL como símbolo.
+	#image6
+
+Finalmente, debemos firmar dos transacciones (Creación de Token y Creación de Organización) con nuestra cartera MetaMask. El precio de la red de pruebas depende principalmente de las tarifas de la Red Ethereum. Recuerda, ¡es Ether virtual por ahora!
+Haciendo clic en "Confirmar" (botón azul) debería terminar el proceso, y obtendrá un mensaje como el que se muestra a continuación. Felicitaciones! Tu DAO está lista. Hagamos clic en "Get Started"
+	#gif1
+
+Cuando hacemos clic en el botón azul "Get Started", estamos entrando en nuestra DAO de Aragón por primera vez. Emocionante! La página de inicio debe presentarnos cuatro funciones con respecto a las 3 aplicaciones disponibles. Ahora profundizaremos en cada una de ellas.
+	#image7
+
+P.D. Este es el proceso de creación de una DAO sobre Aragón. Para entrar posteriormente en la DAO, basta con abrirlo después de hacer clic en "Try Aragon Core 0.5" en aragon.one, introduciendo su nombre y haciendo clic en "Open organization", como se muestra a continuación.
+	#image8
+
+
+::Paso 3::
+Use las apps que necesite:
+Ahora que hemos configurado nuestra DAO, podemos usar las tres aplicaciones disponibles. Son "Token Manager", "Voting" y "Finance", y también veremos la configuración de la DAO. Se puede acceder a todos ellos haciendo clic en el menú de la izquierda de la pantalla.
+	#image7
+
+Token Manager (Gestor de tokens):
+El Administrador de tokens le permite distribuir los tokens de su organización entre las partes interesadas. Al principio, la dirección de la cartera de MetaMask que utilizó para la creación del DAO será la propietaria del 100% de los tokens.
+	#image9
+
+Para asignar tokens a otros miembros de la DAO, haga clic en el botón azul en la esquina superior derecha que dice "Assign Tokens". Allí, debe proporcionar una dirección válida de Ethereum para el destinatario de los tokens y el número de tokens que desea acuñar. Hemos decidido acuñar 0.5 tokens para las siguientes direcciónes.
+	#image10
+
+Esta acción abrirá inherentemente una votación sobre la decisión de acuñar las fichas, con su voto a favor. Dado que usted será el único poseedor del token en este momento, la votación se cerrará automáticamente con un Sí. Tendrá que firmar la transacción utilizando MetaMask.
+	#gif2
+
+Después de asignar tokens a un par de direcciones, su Gestor de tokens debería tener un aspecto parecido a este (compruebe la distribución total de tokens a la derecha de la pantalla):
+	#image11
+
+Para una descripción más técnica del Administrador de tokens, consulte aquí (https://github.com/aragon/aragon-wiki/blob/master/docs/dev/apps/token-manager.md).
+
+Votación:
+La aplicación de Votación es una entidad que ejecutará un conjunto de acciones en otras entidades si los titulares simbólicos de la DAO así lo deciden. Para abrir una nueva votación, haga clic en el botón "Nuevo Voto" de la esquina superior derecha. Luego, simplemente debemos indicar para qué es la votación, y hacer clic en Comenzar a Votar. Deberá confirmar la transacción a través de MetaMask (se abrirá automáticamente).
+	#gif3
+
+Para ver los detalles de una votación determinada, puede hacer clic en "View vote" a la derecha de la pantalla. Debería abrir un tablero como el de abajo. Recuerda que tienes que ser titular de un token para poder participar en una votación en un determinado DAO.
+	#gif4
+
+Ahí tenemos el Estado de la votación, el "Quórum" (que se establece al establecer el DAO), la Cuestión, su creador y los resultados actuales.
+Para una descripción más técnica de la aplicación de Votación, ver aquí.(https://github.com/aragon/aragon-wiki/blob/master/docs/dev/apps/voting.md)
+
+
+Finanzas:
+El propósito de la aplicación Finanzas es hacer un seguimiento de los ingresos y gastos de su organización, así como realizar los pagos. Al principio, sus finanzas parecerán algo vacías, ya que la DAO todavía no tiene fondos propios.
+	#image12
+
+Puede utilizar su cartera MetaMask para enviar algunos fondos a la DAO, o utilizar otras opciones de Rinkeby disponibles para la transferencia de fondos. La dirección a utilizar se especificará más adelante, en la sección Configuración. En nuestro caso, enviamos 0,5 a la DAO, que aparece en el panel después de que la transacción tiene lugar en la red Ethereum (hay que esperar un poco).
+	#gif5
+
+Ahora que la DAO es propietaria de los fondos, puede realizar los pagos haciendo clic en el botón "New transfer" en la esquina superior derecha. A continuación, debe elegir la dirección del Destinatario, el importe de los tokens y el token (ETH, ANT...) en el que desea enviar el pago, y añadir una Referencia (frase corta) para identificarlo. Esto crea un proceso de votación para gestionar esos fondos.
+	#gif6
+
+Para una descripción más técnica de la aplicación de Finanzas, consulte aquí.
+
+
+Configuraciones:
+Puedes encontrar las direcciones de la Organización y de las Aplicaciones en la pestaña Configuración. No debe enviar fondos al DAO mediante una transacción con la dirección de la Organización!
+	#gif7
+
+Aragon 0.7 "Bella" funciona en la Testnet de Rinkeby, por lo que puede solicitar tokens de prueba haciendo clic en esa opción en la configuración de su DAO, como se ha visto anteriormente, y que enviará algunos tokens de prueba para que la DAO juegue con ellos. También puede enviar tokens directamente a la aplicación de Finanzas del DAO, que tiene su propia dirección. De cualquier manera, los fondos aparecerán en la pestaña Finanzas poco después.
+	#image13
+

@@ -1,0 +1,60 @@
+- Lo primero ir a https://testnet.help/en/ethfaucet/rinkeby y conseguir 0.2 test ETH
+
+- Agregarnos a nuestra propia DAO. Siempre darle a EDIT y usar mínimo en Metamask (Slow)
+	1.Enseñar cómo según qué cuenta tengamos abierta en Metamask aparece lo de Yes o No
+	2.Metes la pata y ahora uno tiene 2 tokens. Cómo Remove tokens? Vamos a Permissions, Tokens, Burn tokens. Entity es Voting y Manager podemos poner a un responsable (una custom address)
+
+- Mirar los Settings: ahí podemos pedir test tokens. Los vemos en Finance App
+
+- 1er voto: repetir workshop? Pero ese se queda aquí (vemos los votos de Action). Ahora haremos un voto que afecte realmente. Vamos a instalar el Agent. Y para eso hacer falta usar aragonCLI.
+
+	--- Instalando el Aragon Agent
+	1. Instalamos agente con dao install
+	dao install <nombre-de-la-dao>.aragonid.eth agent --environment aragon:rinkeby
+	2. Votamos que sí queremos upgrade the Kernel.
+	3. dao apps --all <nombre-de-la-dao>.aragonid.eth --environment aragon:rinkeby
+	4. dao acl create <nombre-de-la-dao> <hash-de-la-agent-app> EXECUTE_ROLE <hash-de-la-voting-app> <hash-de-la-voting-app> --environment aragon:rinkeby
+	5. Enseñar cómo se puede votar desde el terminal:
+	dao exec <nombre-de-la-dao> <hash-de-la-voting-app> vote <id-del-voto> true true --environment aragon:rinkeby
+	6. Ahora agent ya está en el App Center. Comprobamos que tiene en Permissions set on this app a Voting como Execute actions.
+
+
+	--- Votando a través del Aragon Agent desde nuestra DAO en otra
+	7. Antes que nada, la DAO A tiene que ser stakeholder dentro de la DAO B. Hacemos:
+	dao exec <name of dao B> <token manager app address of dao B> mint <agent app address of dao A> 1000000000000000000 --environment aragon:rinkeby
+	(Tener en cuenta la priv key guardada en ~/.aragon/rinkeby_key.json. Ahora es otra clave)
+	8. Añadimos a un tercero a la DAO sólo para probar la votación con el Aragon Agent.
+	9. dao act <agent app address of dao A> <voting app address of dao B>  "vote(uint256,bool,bool)" 1 true true  --environment aragon:rinkeby
+	10. Con esto se dispara una votación dentro de la DAO A para ver si se ejecuta o no el Aragon Agent en la DAO B. (Criticismo: descripción bastante insuficiente sobre lo que está haciendo ese voto).
+
+
+- Modificar support y quorum.
+	El valor del quorum es un `uint64` (e.g. 600000000000000000)
+	`dao exec <dao-addr> <voting-proxy-addr> changeMinAcceptQuorumPct <new-quorum>`
+	`dao exec <dao-addr> <voting-proxy-addr> changeSupportRequiredPct <new-quorum>`
+
+
+
+- Publicar paquete:
+	1. react-aragon-boilerplate.
+	2. tener en cuenta la mnemonic seed
+	3. tener en cuenta ~/.aragon/rinkeby_key.json
+0xcb8a7c304c091cddb700d82b8e94e813a8459f617653125711e72000e245cb68
+	4. tener en cuenta el nombre (error al hacer 'aragon apm packages open.aragonpm.eth --env aragon:rinkeby')
+
+	5. Una vez se hace el dao install
+	(dao install workshoptest1.aragonid.eth probing.open.aragonpm.eth 1.0.0 --env aragon:rinkeby)
+	vemos en dao apps --all que aparece como app no permisionada.
+	6. dao acl create otra vez.
+	dao acl create workshoptest1.aragonid.eth 0x1F13Dc716e4258dF79523F4249DBeA584bD1b90B INCREMENT_ROLE 0x82144a2e9c14849ed7f9baf5ca13314f0149be15 0x82144a2e9c14849ed7f9baf5ca13314f0149be15 --env aragon:rinkeby
+
+	y lo mismo con DECREMENT
+	7. probamos nuestra app. Le damos a increment y luego vamos a Voting para sumar 1 en el contador.
+
+
+ ⚠ Cannot find artifacts for version 6.0.0 in aragonPM. Please make sure the package was published and your IPFS or HTTP
+ server are running.
+
+
+
+

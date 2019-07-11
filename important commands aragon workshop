@@ -1,0 +1,131 @@
+dao acl 0x75cdE58CA220c434C065E58500E49D1872489c0f --environment aragon:rinkeby
+
+APM -> Aragon Package Manager
+
+https://blog.aragon.one/aragon-agent-beta-release/
+
+
+Import Metamask priv key: https://hack.aragon.org/docs/guides-faq#set-a-private-key
+(TEMA DE LA SEGURIDAD)
+
+----INSTALANDO Voting App
+
+dao install <dao-address> voting --app-init-args [token-address] 600000000000000000 250000000000000000 604800
+
+dao install 0x75cdE58CA220c434C065E58500E49D1872489c0f voting --app-init-args 0x8503d6722dE7794c0d2cB04B31CbD865ec095397 510000000000000000 250000000000000000 86400 --environment aragon:rinkeby
+
+Aparece nuevo voto: 'Kernel: Create a new upgradeable instance of 'voting.aragonpm.eth' app linked to the Kernel'
+
+A continuación aparece en permissionless apps.
+
+dao acl create meetupethereumsvq.aragonid.eth <voting-app-proxy> CREATE_VOTES_ROLE <token-manager> <voting-app-proxy> --environment aragon:rinkeby
+
+Lo mismo con VOTE_ROLE
+
+dao exec <name-of-dao> <voting-app-address> vote <vote-id> true true --environment
+
+dao acl grant meetupethereumsvq.aragonid.eth 0xb1bca33d72469db459f5f72a1f83413859b931f3 MINT_ROLE 0x8F7Ca460E486f02f3C86Ebd6A123f1e7b745C4C6 $E
+
+dao acl revoke meetupethereumsvq.aragonid.eth 0xb1bca33d72469db459f5f72a1f83413859b931f3 MINT_ROLE 0xb363340c04c993aa8546849da86a73fa3ac70944 $E
+
+
+--- Lista de Roles Voting App: https://github.com/aragon/aragon-apps/blob/master/apps/voting/arapp.json#L29
+
+
+----INSTALANDO AGENTE
+
+dao install meetupethereumsvq.aragonid.eth agent --environment aragon:rinkeby
+
+After this the following voting appears: Kernel: Create a new upgradeable instance of 0x9ac98dc5f995bf0211ed589ef022719d1487e5cb2bab505676f0d084c07cf89a app linked to the Kernel, setting its code to 
+ 
+Complete guide to install agent: https://hack.aragon.org/docs/guides-use-agent
+
+dao apps 0x75cdE58CA220c434C065E58500E49D1872489c0f --all --environment aragon:rinkeby
+
+dao acl create meetupethereumsvq.aragonid.eth 0x783e82900C2FBe6a9240605175b6E3Fd3DE955Ba EXECUTE_ROLE 0xb363340c04c993aa8546849da86a73fa3ac70944 0x5c462d4713Af193B096430b007465f62BF5584Fc --environment aragon:rinkeby
+
+para mirar el integer ID de un voto sí hay que mirar en la UI
+
+dao exec meetupethereumsvq.aragonid.eth 0xb363340c04c993aa8546849da86a73fa3ac70944 vote 9 true true --environment aragon:rinkeby
+
+✖ Cannot read property 'description' of undefined --> pero este error no impide que se ejecute
+
+Ahora el Agente ya debería estar instalado 
+
+User stories del Aragon Agent:
+	An Aragon DAO can interact with other Ethereum smart contracts or protocols without the need of implementing a custom Aragon app for every protocol.
+	A user/member of a DAO can use any Ethereum dApp identified as their DAO, signer integrations can take care of routing the intent through the governance process of the DAO.
+	An Aragon DAO can participate as a stakeholder in another DAO, allowing the creation of DAO stacks.
+
+
+----CHECKING PACKAGES, PUBLISHING
+
+-Check all packages in Rinkeby: 
+npx aragon apm packages --environment aragon:rinkeby
+-Los paquetes que ha hecho la gente:
+aragon apm packages open.aragonpm.eth --env aragon:rinkeby
+
+-Inspect existing versions:
+aragon apm versions survey.aragonpm.eth --environment aragon:rinkeby
+
+npx aragon apm info voting.aragonpm.eth --environment aragon:rinkeby
+
+Publish package:
+	
+	example truffle.js:
+
+		module.exports = {
+		  networks: {
+		    rinkeby: {
+		      host: "localhost", // Connect to geth on the specified
+		      port: 8545,
+		      from: "0x5f6f7e8cc7346a11ca2def8f827b7a0b612c56a1", // default address to use for any transaction Truffle makes during migrations
+		      network_id: 4,
+		      gas: 4612388 // Gas limit used for deploys
+		    },
+		    development: {
+		      host: 'localhost',
+		      port: 8545,
+		      network_id: '*'
+		    }
+		  }
+		}
+*El from viene de cuando hacemos aragon devchain en otro terminal y nos dice:
+ ℹ ENS instance deployed at 0x5f6f7e8cc7346a11ca2def8f827b7a0b612c56a1
+
+aragon apm publish major --environment rinkeby
+
+dao install workshoptest1.aragonid.eth probing.open.aragonpm.eth 1.0.0 --env aragon:rinkeby
+
+----VOTING IN ANOTHER ORGANIZATION (with the Agent)
+
+dao exec <name of dao B> <token manager app address of dao B> mint <agent app address of dao A> 1000000000000000000 --environment aragon:rinkeby --apm.ipfs.rpc https://ipfs.eth.aragon.network/ipfs/
+
+	dao exec meetupethereumsvq2.aragonid.eth 0x67bf3a78b563c23460ec717e10af160c16db56a8 mint 	0x783e82900c2fbe6a9240605175b6e3fd3de955ba 1000000000000000000 --environment aragon:rinkeby
+
+En aragonCLI 1000000000000000000 = 1
+
+Vemos cómo aparece la dirección del Agent como nuevo stakeholder en la DAO B!
+
+Añadir un tercero es simplemente:
+dao exec <name of dao B> <token manager app address of dao B> mint <third entity's address> 1000000000000000000 --environment aragon:rinkeby --apm.ipfs.rpc https://ipfs.eth.aragon.network/ipfs/
+
+
+-Use A's Agent app to take part in B's vote
+
+Aquí ya usamos dao act.
+
+	Inciso (parámetros de la Voting App):
+
+	1, true and true.
+
+	The first (1) is the id for the vote we want to interact with. This is always an integer. Remember that vote ids start at 0 and increment by 1 each time a vote is created.
+
+	The second (true) specifies which was we want to vote: true means yes and false means no.
+
+	And the third (true) specifies whether the contract should check if a vote already has enough support to be executed. If it does, the Voting app will perform the action that was being voted on, and the vote will be close. true means check if this vote can be executed, false means don't check.
+
+dao act <agent app address of dao A> <voting app address of dao B>  "vote(uint256,bool,bool)" 1 true true  --environment aragon:rinkeby
+
+dao act 0x783e82900c2fbe6a9240605175b6e3fd3de955ba 0xa3f642306cd5819ba2a49969d80e0819a38417a2 "vote(uint256,bool,bool)" 1 true true  --environment aragon:rinkeby
+

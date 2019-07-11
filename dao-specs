@@ -1,0 +1,25 @@
+Aragon version 5.9.4
+
+DAO: 0x0d47A24B055efAE0d7729D94B62f094cB9ee34Fa
+token (DaoCoin DCN): 0xb9bb83950D6081ad9d73BfcdF3AfC04D61A81709
+Token transaction hash: 0x6874af30434a06361e6a9d320e9965884bb0e4ab6ccc873e6a81e98dc7c84fe3
+Successfully deployed the token factory at 0x0dBCe7052DF4d1014bbB80d746D2d64e6A85ef2F
+
+
+token-manager:  0x0ef6b0920a4e552A2f65693e8C60161714ceA466
+change token-controller: Successfully changed the controller of 0xb9bb83950D6081ad9d73BfcdF3AfC04D61A81709 to 0x0ef6b0920a4e552A2f65693e8C60161714ceA466
+ ℹ Transaction hash: 0x99bf3430174314c56c9422d313c8eed703276024b0151643c2881fdafdf671d1
+
+my_address: 0xb4124ceb3451635dacedd11767f004d8a28c6ee7
+voting app: 0x45a07c8237B85FE6BBA403769f3599d5a5D11f67
+
+vault=0xbe218cEDdb0dd00Ebc51EAEA6bf86757882be880
+finance=0xa33100B5ffc903BCBa15b2b1f3d3aC4af1DCe9AF
+
+
+dao acl $DAO $E
+dao apps $DAO --all $E
+
+xdg-open http://rinkeby.aragon.org/#/0x0d47A24B055efAE0d7729D94B62f094cB9ee34Fa
+
+
